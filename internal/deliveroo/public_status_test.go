@@ -160,7 +160,7 @@ func TestFetchPublicStatus(t *testing.T) {
 		return browserpage.Result{
 			FinalURL: "https://deliveroo.example/final",
 			Title:    "Deliveroo",
-			Text: "This order is for Gildas\nDelivery\n221 Pentonville Road, FORA, N19UZ\nOrder Details\nTa'Mini\nOrder #5040",
+			Text:     "This order is for Gildas\nDelivery\n221 Pentonville Road, FORA, N19UZ\nOrder Details\nTa'Mini\nOrder #5040",
 		}, nil
 	}
 

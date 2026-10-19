@@ -16,7 +16,8 @@ func TestGlovoCLI_ConfigSetAndShow(t *testing.T) {
 	cfgPath := filepath.Join(t.TempDir(), "config.json")
 
 	// Test config set
-	out, _, err := runCLI(cfgPath, []string{"glovo", "config", "set",
+	out, _, err := runCLI(cfgPath, []string{
+		"glovo", "config", "set",
 		"--city-code", "MAD",
 		"--country-code", "ES",
 		"--language", "en",

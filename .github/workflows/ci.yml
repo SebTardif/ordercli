@@ -10,10 +10,16 @@ permissions:
 
 jobs:
   test:
+    name: test (${{ matrix.check }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: ["1.27.0", "1.27.1"]
+        include:
+          - go-version: "1.27.0"
+            check: "1.27.0"
+          # Preserve the required status name while testing the patched compiler.
+          - go-version: "1.27.2"
+            check: "1.27.1"
     env:
       GOTOOLCHAIN: local
     steps:
@@ -44,7 +50,7 @@ jobs:
           args: --timeout=3m
 
   macos-release:
-    runs-on: macos-15
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
@@ -63,3 +69,17 @@ jobs:
         run: |
           goreleaser check
           goreleaser build --snapshot --clean
+      - name: Smoke-test both macOS architectures
+        run: |
+          arch -x86_64 /usr/bin/true || sudo softwareupdate --install-rosetta --agree-to-license
+          arch -x86_64 /usr/bin/true
+          for target in amd64 arm64; do
+            for binary in dist/ordercli_darwin_"${target}"*/ordercli; do
+              test -x "$binary"
+              if [ "$target" = amd64 ]; then
+                arch -x86_64 "$binary" --version
+              else
+                "$binary" --version
+              fi
+            done
+          done

@@ -9,8 +9,10 @@ import (
 	"github.com/steipete/ordercli/internal/browserpage"
 )
 
-var quantityOnlyRe = regexp.MustCompile(`^\d+\s*x$`)
-var readBrowserPageText = browserpage.ReadText
+var (
+	quantityOnlyRe      = regexp.MustCompile(`^\d+\s*x$`)
+	readBrowserPageText = browserpage.ReadText
+)
 
 type PublicStatus struct {
 	URL              string   `json:"url,omitempty"`
