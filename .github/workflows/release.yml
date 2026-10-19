@@ -3,6 +3,10 @@ name: release
 on:
   workflow_dispatch:
     inputs:
+      dry_run:
+        description: Build, sign and verify without creating tags or releases
+        type: boolean
+        default: true
       version:
         description: SemVer to release (for example 0.2.1)
         required: true
@@ -30,8 +34,9 @@ jobs:
       contents: write
       pull-requests: write
       statuses: read
-    uses: openclaw/release-workflows/.github/workflows/release-go-cli.yml@f613cbfed2b043159c850c353e7facb8c89833b0 # v1.9.0
+    uses: openclaw/release-workflows/.github/workflows/release-go-cli.yml@fc49859568b3781af7663bee48c003fd987dc08b # v1.11.8
     with:
+      dry-run: ${{ inputs.dry_run }}
       version: ${{ inputs.version }}
       repository-type: personal
       build-runner: macos

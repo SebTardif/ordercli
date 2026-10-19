@@ -29,7 +29,7 @@ Prebuilt archives for macOS, Linux, and Windows are available on the [GitHub rel
 
 Requires Go 1.27 or newer.
 
-The preferred build toolchain is Go 1.27.1; CI also verifies the Go 1.27.0 source minimum.
+The preferred build toolchain is Go 1.27.2; CI also verifies the Go 1.27.0 source minimum. macOS release checks use the Apple Silicon `xcode-27` runner, preserve the macOS 13 minimum, and execute Intel binaries under Rosetta.
 
 ```sh
 go test ./...
