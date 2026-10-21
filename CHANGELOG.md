@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.2 (2026-10-20)
+
+**Highlights:** Fix certificate validation vulnerability GO-2026-6809 in release binaries.
+
+- Security: build with Go 1.27.3 to fix certificate validation vulnerability GO-2026-6809.
 - Move macOS CI and release verification to Xcode 27, preserving macOS 13 and verifying Intel CLI execution under Rosetta; add non-publishing release dry runs.
 - Build with patched Go 1.27.2 while retaining the Go 1.27.0 source minimum.
 
